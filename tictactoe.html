@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello</title>
+
+<script type="text/javascript">
+     var count=1;
+     let gameareaActive = true;
+ function fill(control)
+    {
+      if(count<=9)
+        {
+            if(count%2 == 0)
+            {
+              if(gameareaActive)
+              {
+               document.getElementById(control.id).innerHTML="O";
+              }
+            }else
+            {
+              if(gameareaActive)
+              {
+                document.getElementById(control.id).innerHTML="X";
+              } 
+            }
+            count++;
+
+          if(checkWin())
+           {
+               gameareaActive = false;
+               alert("Congratulations! WINNER");
+               
+           }
+        }else
+        {
+            gameareaActive = false;
+             alert("Game ended in a Draw");
+            
+        }
+        
+    }
+    
+        
+ function reset()
+    {
+       for(let i = 1; i <= 9; i++)
+         {
+           document.getElementById('block'+i).innerHTML=""; 
+
+         }
+         count=1;
+         gameareaActive = true;
+           
+    }
+ 
+  function checkWin()
+  {
+    if((getData("block4")!="" && getData("block5")!="" && getData("block6")!="" && getData("block4")==getData("block5") && 
+            getData("block5")==getData("block6")) || (getData("block1")!="" && getData("block2")!="" && getData("block3")!="" &&
+             getData("block1")==getData("block2") && getData("block2")==getData("block3")) ||(getData("block7")!="" && getData("block8")!="" && 
+             getData("block9")!="" && getData("block7")==getData("block8") && getData("block8")==getData("block9")) || (getData("block1")!="" && 
+             getData("block4")!="" && getData("block7")!="" && getData("block1")==getData("block4") &&  getData("block4")==getData("block7")) || (getData("block2")!="" &&
+              getData("block5")!="" && getData("block8")!="" && getData("block2")==getData("block5") && getData("block5")==getData("block8")) || (getData("block3")!="" && 
+             getData("block6")!="" && getData("block9")!="" && getData("block3")==getData("block6") && getData("block6")==getData("block9"))||(getData("block1")!="" && 
+             getData("block5")!="" && getData("block9")!="" && getData("block1")==getData("block5") && getData("block5")==getData("block9"))|| (getData("block3")!="" && 
+             getData("block5")!="" && getData("block7")!="" && getData("block3")==getData("block5") &&
+              getData("block5")==getData("block7")))
+            {
+                  return true;
+            }
+  }
+ 
+ function getData(block)
+ {
+     return document.getElementById(block).innerHTML;
+ }
+          
+</script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Aerial, sans-serif
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #eee;
+            padding: 5px;
+            margin: 2px;
+            min-height: 400px;
+            
+        }
+        .grid{
+            display: grid;
+            width: 300px;
+            height: 300px;
+            grid-template-columns: auto auto auto;
+            
+            
+
+        }
+        .block{
+            display: flex;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid black;
+            transition: background 0.2s ease-in-out; 
+            font-size: 50px; 
+        }
+        .block:hover{
+            cursor: pointer;
+            background: #73d18f;
+        }
+        button{
+            outline: none;
+            border: 4px solid green;
+            border-radius: 1px;
+            font-size:25px;
+            background: none;
+            font-weight: bold;
+            padding: 10px;
+            transition: all 0.5s ease-in-out;
+        }
+        button:hover{
+            background: green;
+            color: white;
+            cursor: pointer;
+        }
+        .endgame{
+            display: none;
+            position: absolute;
+            top: 30%;
+            left: 38%;
+            border: 5px solid lightgreen;
+            font-size: 90px;
+            background-color: red;
+
+
+        }
+        #block1,#block2,#block3{
+            border-top: none;
+
+        }
+        #block1,#block4,#block7{
+            border-left: none;
+        }
+        #block3,#block6,#block9{
+            border-right: none;
+        }
+        #block7,#block8,#block9{
+            border-bottom: none;
+        }
+        
+        h1{
+            margin-bottom: 30px;
+            
+        }
+        h2{
+            margin-bottom: 10px;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+
+
+    </style>
+   
+</head>
+<body>
+     <div class="container">
+          <h1> WELCOME TO Tic Tac Toe</h1>
+          <div class="grid"> 
+               <div class="block" id="block1"  onclick = "fill(this)"></div>
+               <div class="block" id="block2"  onclick = "fill(this)"></div>
+               <div class="block" id="block3"  onclick = "fill(this)"></div>
+               <div class="block" id="block4"  onclick = "fill(this)"></div>
+               <div class="block" id="block5"  onclick = "fill(this)"></div>
+               <div class="block" id="block6"  onclick = "fill(this)"></div>
+               <div class="block" id="block7"  onclick = "fill(this)"></div>
+               <div class="block" id="block8"  onclick = "fill(this)"></div>
+               <div class="block" id="block9"  onclick = "fill(this)"></div>
+          </div>
+          <div class="endgame">Endgame!</div>
+          <h2 id="game-status"></h2>
+          <button class ="reset_game" onclick="reset()">RESTART GAME</button>
+     </div> 
+
+
+</body>
+</html>
